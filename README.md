@@ -1,5 +1,3 @@
 # Simple pure java webapp
 
-without any frameworks
-
-only servlets and jsp
+Without any frameworks, only servlets and jsp.
