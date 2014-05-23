@@ -34,6 +34,15 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>ProfessorServlet</servlet-name>
+    <servlet-class>ua.pp.condor.students.servlet.ProfessorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProfessorServlet</servlet-name>
+    <url-pattern>/add</url-pattern>
+  </servlet-mapping>
+
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>

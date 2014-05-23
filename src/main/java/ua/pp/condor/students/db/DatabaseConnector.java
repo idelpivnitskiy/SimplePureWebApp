@@ -3,7 +3,9 @@ package ua.pp.condor.students.db;
 import org.postgresql.Driver;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -80,6 +82,35 @@ public class DatabaseConnector {
         return getStudents("mark1 < " + Mark.F.ordinal()
                 + " AND  mark2 < " + Mark.F.ordinal()
                 + " AND (mark1 > " + Mark.A.ordinal()
-                        + " OR mark2 > " + Mark.A.ordinal() + ')');
+                + " OR mark2 > " + Mark.A.ordinal() + ')');
+    }
+
+    public static boolean addStudent(Student student) {
+        if (student.getName() == null || student.getName().isEmpty()) {
+            throw new IllegalStateException("Student name can not be empty");
+        }
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement stmt = conn.prepareStatement(
+                     "INSERT INTO student (name, mark1, mark2) values (?,?,?)")) {
+
+            stmt.setString(1, student.getName());
+            stmt.setInt(2, student.getMark1().ordinal());
+            stmt.setInt(3, student.getMark2().ordinal());
+
+            try {
+                conn.setAutoCommit(false);
+                stmt.executeUpdate();
+                conn.commit();
+                return true;
+            } catch (SQLException e) {
+                conn.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Can not addStudent:");
+            e.printStackTrace();
+        }
+        return false;
     }
 }
