@@ -4,17 +4,36 @@
 <html>
     <head>
         <title>Login Form</title>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 500px;
+            }
+            thead {
+                background-color: lightgrey;
+            }
+            table, th, td {
+                border: 1px solid black;
+                padding: 5px;
+            }
+            td {
+                text-align: center;
+            }
+            tbody td:first-child {
+                text-align: left;
+            }
+        </style>
     </head>
     <body>
         <section class="container">
-            <h2>Hello!</h2>
             <c:if test="${sessionScope.auth == null}">
                 <p><a href="/login">Login</a></p>
             </c:if>
             <c:if test="${sessionScope.auth != null}">
                 <p><a href="/logout">Logout</a></p>
             </c:if>
-            <table border="1px">
+            <h2>All students</h2>
+            <table>
                 <thead>
                     <tr>
                         <th>Student</th>
