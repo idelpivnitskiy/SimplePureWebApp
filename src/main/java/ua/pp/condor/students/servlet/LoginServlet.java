@@ -1,5 +1,6 @@
 package ua.pp.condor.students.servlet;
 
+import logging.AuthorizationLogger;
 import ua.pp.condor.students.db.DatabaseConnector;
 
 import javax.servlet.ServletException;
@@ -23,6 +24,7 @@ public class LoginServlet extends HttpServlet {
         if (DatabaseConnector.checkProfessor(login, password)) {
             HttpSession session = request.getSession(true);
             session.setAttribute(AUTH_SESSION_ATTRIBUTE, true);
+            AuthorizationLogger.login(login);
             response.sendRedirect("/");
         } else {
             request.setAttribute("error", true);
