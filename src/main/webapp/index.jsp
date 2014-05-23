@@ -7,7 +7,7 @@
         <style>
             table {
                 border-collapse: collapse;
-                width: 500px;
+                width: 400px;
             }
             thead {
                 background-color: lightgrey;
@@ -22,6 +22,9 @@
             tbody td:first-child {
                 text-align: left;
             }
+            thead th:first-child {
+                width: 200px;
+            }
         </style>
     </head>
     <body>
@@ -32,7 +35,8 @@
             <c:if test="${sessionScope.auth != null}">
                 <p><a href="/logout">Logout</a></p>
             </c:if>
-            <h2>All students</h2>
+
+            <h2>Excellent students</h2>
             <table>
                 <thead>
                     <tr>
@@ -42,13 +46,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="student" items="${students}">
+                    <c:forEach var="student" items="${excellentStudents}">
                         <tr>
                             <td>${student.name}</td>
                             <td>${student.mark1}</td>
                             <td>${student.mark2}</td>
                         </tr>
                     </c:forEach>
+                </tbody>
+            </table>
+
+            <h2>General students</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Mark 1</th>
+                    <th>Mark 2</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="student" items="${generalStudents}">
+                    <tr>
+                        <td>${student.name}</td>
+                        <td>${student.mark1}</td>
+                        <td>${student.mark2}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+
+            <h2>Unsatisfactory students</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Mark 1</th>
+                    <th>Mark 2</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="student" items="${unsatisfactoryStudents}">
+                    <tr>
+                        <td>${student.name}</td>
+                        <td>${student.mark1}</td>
+                        <td>${student.mark2}</td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </section>

@@ -19,8 +19,14 @@ public class StudentsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Student> students = DatabaseConnector.getStudents();
-        request.setAttribute("students", students);
+
+        request.setAttribute("excellentStudents",
+                DatabaseConnector.getExcellentStudents());
+        request.setAttribute("unsatisfactoryStudents",
+                DatabaseConnector.getUnsatisfactoryStudents());
+        request.setAttribute("generalStudents",
+                DatabaseConnector.getGeneralStudents());
+
         getServletContext()
                 .getRequestDispatcher("/index.jsp").forward(request, response);
     }

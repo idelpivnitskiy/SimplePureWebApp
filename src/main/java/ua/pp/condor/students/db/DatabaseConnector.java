@@ -42,11 +42,12 @@ public class DatabaseConnector {
         return false;
     }
 
-    public static List<Student> getStudents() {
+    private static List<Student> getStudents(String condition) {
         List<Student> students = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT name, mark1, mark2 FROM student")) {
+             ResultSet rs = stmt.executeQuery("SELECT name, mark1, mark2 FROM student"
+                + " WHERE " + condition)) {
             while (rs.next()) {
                 Student student = new Student();
                 student.setName(rs.getString("name"));
@@ -59,5 +60,26 @@ public class DatabaseConnector {
             e.printStackTrace();
         }
         return students;
+    }
+
+    public static List<Student> getAllStudents() {
+        return getStudents("1=1");
+    }
+
+    public static List<Student> getExcellentStudents() {
+        return getStudents("mark1 = " + Mark.A.ordinal()
+                + " AND mark2 = " + Mark.A.ordinal());
+    }
+
+    public static List<Student> getUnsatisfactoryStudents() {
+        return getStudents("mark1 = " + Mark.F.ordinal()
+                + " OR mark2 = " + Mark.F.ordinal());
+    }
+
+    public static List<Student> getGeneralStudents() {
+        return getStudents("mark1 < " + Mark.F.ordinal()
+                + " AND  mark2 < " + Mark.F.ordinal()
+                + " AND (mark1 > " + Mark.A.ordinal()
+                        + " OR mark2 > " + Mark.A.ordinal() + ')');
     }
 }
