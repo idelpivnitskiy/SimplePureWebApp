@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login Form</title>
+        <title>Students</title>
         <style>
             table {
                 border-collapse: collapse;
@@ -33,7 +33,7 @@
                 <p><a href="/login">Login</a></p>
             </c:if>
             <c:if test="${sessionScope.auth != null}">
-                <p><a href="/logout">Logout</a></p>
+                <p><a href="/add">Add</a> new student or <a href="/logout">Logout</a></p>
             </c:if>
 
             <h2>Excellent students</h2>

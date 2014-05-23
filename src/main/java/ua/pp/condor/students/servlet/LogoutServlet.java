@@ -1,7 +1,5 @@
 package ua.pp.condor.students.servlet;
 
-import ua.pp.condor.students.db.DatabaseConnector;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

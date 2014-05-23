@@ -32,7 +32,7 @@ public class DatabaseConnector {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT 1 FROM professor WHERE login = '" + login
-                     + "' and password = '" + password + "'")) {
+                     + "' AND password = '" + password + "'")) {
 
             return rs.next();
         } catch (SQLException e) {
