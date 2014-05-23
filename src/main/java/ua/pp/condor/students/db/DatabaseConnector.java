@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseConnector {
 
@@ -38,5 +40,24 @@ public class DatabaseConnector {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static List<Student> getStudents() {
+        List<Student> students = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT name, mark1, mark2 FROM student")) {
+            while (rs.next()) {
+                Student student = new Student();
+                student.setName(rs.getString("name"));
+                student.setMark1(Mark.values()[rs.getInt("mark1")]);
+                student.setMark2(Mark.values()[rs.getInt("mark2")]);
+                students.add(student);
+            }
+        } catch (SQLException e) {
+            System.out.println("Can not getStudents:");
+            e.printStackTrace();
+        }
+        return students;
     }
 }
