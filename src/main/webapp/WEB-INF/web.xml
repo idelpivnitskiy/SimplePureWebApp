@@ -8,6 +8,15 @@
   <display-name>Simple Pure Webapp</display-name>
 
   <servlet>
+    <servlet-name>StudentsServlet</servlet-name>
+    <servlet-class>ua.pp.condor.students.servlet.StudentsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentsServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>ua.pp.condor.students.servlet.LoginServlet</servlet-class>
   </servlet>
@@ -26,15 +35,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>StudentsServlet</servlet-name>
-    <servlet-class>ua.pp.condor.students.servlet.StudentsServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>StudentsServlet</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>ProfessorServlet</servlet-name>
     <servlet-class>ua.pp.condor.students.servlet.ProfessorServlet</servlet-class>
   </servlet>
@@ -42,6 +42,15 @@
     <servlet-name>ProfessorServlet</servlet-name>
     <url-pattern>/add</url-pattern>
   </servlet-mapping>
+
+  <filter>
+    <filter-name>ProfessorFilter</filter-name>
+    <filter-class>ua.pp.condor.students.servlet.ProfessorFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ProfessorFilter</filter-name>
+    <servlet-name>ProfessorServlet</servlet-name>
+  </filter-mapping>
 
   <session-config>
     <session-timeout>30</session-timeout>
